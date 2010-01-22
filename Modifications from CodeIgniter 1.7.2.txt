@@ -1,0 +1,52 @@
+Removed if ( ! defined('BASEPATH')) exit('No direct script access allowed'); from files
+Removed EXT define so ".php" is now used instead for all includes
+Added Exception handling as well as still supporting error handling
+Made some minor code optimizations
+Made some minor formatting changes
+Removed captcha plugin
+Removed JavaScript calendar plugin
+Removed Compatibility Helper
+Removed deprecated orwhere from DB_active_rec
+Removed deprecated orlike from DB_active_rec
+Removed deprecated groupby from DB_active_rec
+Removed deprecated orhaving from DB_active_rec
+Removed deprecated orderby from DB_active_rec
+Removed deprecated getwhere from DB_active_rec
+Removed MySQL support (not MySQLi)
+Removed MS SQL support
+Removed oci8 support
+Removed ODBC support
+Removed SQLite support
+Removed Postgre support
+Removed deprecated _create_database from CI_DB_mysqli_utility
+Removed deprecated _drop_database from CI_DB_mysqli_utility
+Removed Sha1 library
+Removed dohash function from Security Helper
+Changed default location of cache folder from BASEPATH to APPPATH
+Changed default location of log folder from BASEPATH to APPPATH
+Added extra optional parameters to show_404 function
+Added support for helper namespaces
+Added json helper
+Added date\mysql helper function
+Added xml_encode function to the XML helper
+Added xml\output helper function
+Added arr\random helper function alias
+Added arr\format and arr\to_object helper functions
+Removed $config['charset'] so all character encoding is fixed to UTF-8
+Added assert helper
+Added autoloading code directories
+Added autoloading namespaced classes
+Modified prep_url function in Url Helper to ignore ftp:\\ URLs
+Added DynamicCI, Library and DynamicLibrary base classes
+Renamed URL Helper function "redirect" to "ci_redirect"
+Added str/append Helper function
+Added support for sprintf arguments in the Language Helper's line function
+Added html\wrap, html\position, html\flash, html\youtube, html\vimeo and html\script Helper functions
+Added date\from_string, date\mysql_to_unix and date\gmt_to_server Helper functions
+Modified get_filenames function in File Helper to correctly handle Windows filesystems
+Added all error constants to Exceptions class up to version 5.3.0
+Modified CI_Profiler slightly so that it's profiling produces valid xHTML strict output
+Added an extra configuration file that automatically gets loaded at the same time as config.php: common.php
+Added support for custom 404 error controller
+Added support for 404 error handler method for controllers
+Removed fonts folder

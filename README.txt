@@ -1,0 +1,1 @@
+This is a modifed version of CodeIgniter 1.7.2. It has been modified by ShiverCube to strip PHP 4 compaitibility, and to include exclusive PHP 5.3 features.
