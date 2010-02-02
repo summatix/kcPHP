@@ -1,5 +1,8 @@
 <?php
 
+// CI Version
+define('CI_VERSION',	'1.7.2');
+
 /*
  * ------------------------------------------------------
  *  Define constants
@@ -26,6 +29,9 @@ define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
 
 // ------------------------------------------------------------------------
 
+// Set the default content type
+header('Content-Type: text/html;charset=utf-8');
+
 /*
  * ------------------------------------------------------
  *  Load the global functions
@@ -48,8 +54,15 @@ require(APPPATH.'config/constants.php');
 if (HANDLE_ERRORS)
 {
 	set_error_handler('_error_handler');
-	set_exception_handler('_error_handler');
+	set_exception_handler('_exception_handler');
 }
+
+/*
+ * ------------------------------------------------------
+ *  Register the __autoload handler before any other classes are initialized
+ * ------------------------------------------------------
+ */
+spl_autoload_register('_autoload');
 
 /*
  * ------------------------------------------------------
@@ -78,6 +91,8 @@ $EXT->_call_hook('pre_system');
  *  Instantiate the base classes
  * ------------------------------------------------------
  */
+
+require(BASEPATH.'codeigniter/utf8.php');
 
 $CFG =& load_class('Config');
 $URI =& load_class('URI');
