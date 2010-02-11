@@ -36,32 +36,5 @@ define('FOPEN_READ_WRITE_CREATE', 				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT', 			'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
-/**
- * __autoload handler to load classes from the "code" directory or a namespaced folder within the MODULAR_APPPATH
- * directory
- *
- * @access private
- * @param string
- */
-function _my_autoload($class)
-{
-	if (preg_match('/^([_a-z0-9]+\\\\)+[_a-z0-9]+$/im', $class))
-	{
-		$file = MODULAR_APPPATH.str_replace('\\', '/', $class).'.php';
-		if (file_exists($file))
-		{
-			require $file;
-		}
-	}
-	else
-	{
-		if (file_exists(MODULAR_APPPATH."code/{$class}.php"))
-		{
-			require MODULAR_APPPATH."code/{$class}.php";
-		}
-	}
-}
-spl_autoload_register('_my_autoload');
-
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
