@@ -61,20 +61,6 @@ class CI_Router {
 	 */
 	protected function _set_routing()
 	{
-		// Are query strings enabled in the config file?
-		// If so, we're done since segment based URIs are not used with query strings.
-		if ($this->config->item('enable_query_strings') === TRUE AND isset($_GET[$this->config->item('controller_trigger')]))
-		{
-			$this->set_class(trim($this->uri->_filter_uri($_GET[$this->config->item('controller_trigger')])));
-
-			if (isset($_GET[$this->config->item('function_trigger')]))
-			{
-				$this->set_method(trim($this->uri->_filter_uri($_GET[$this->config->item('function_trigger')])));
-			}
-			
-			return;
-		}
-		
 		// Load the routes.php file.
 		require(APPPATH.'config/routes.php');
 		$this->routes = ( ! isset($route) OR ! is_array($route)) ? array() : $route;

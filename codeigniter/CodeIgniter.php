@@ -118,6 +118,16 @@ if ($EXT->_call_hook('cache_override') === FALSE)
 {
 	if ($OUT->_display_cache($CFG, $URI) == TRUE)
 	{
+		/*
+		 * ------------------------------------------------------
+		 *  Close the DB connection if one exists
+		 * ------------------------------------------------------
+		 */
+		if (class_exists('CI_DB') AND isset($CI->db))
+		{
+			$CI->db->close();
+		}
+		
 		exit;
 	}
 }

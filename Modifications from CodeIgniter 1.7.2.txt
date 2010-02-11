@@ -50,3 +50,5 @@ Added an extra configuration file that automatically gets loaded at the same tim
 Added support for custom 404 error controller
 Added support for 404 error handler method for controllers
 Removed fonts folder
+Closes database connection after outputting cache
+Removed support for using query strings to load controllers
