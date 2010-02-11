@@ -44,6 +44,7 @@ $config['index_page'] = '';
 | 'QUERY_STRING'	Uses the QUERY_STRING
 | 'REQUEST_URI'		Uses the REQUEST_URI
 | 'ORIG_PATH_INFO'	Uses the ORIG_PATH_INFO
+| 'CLI'				Uses command line arguments
 |
 */
 $config['uri_protocol']	= 'AUTO';

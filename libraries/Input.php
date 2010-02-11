@@ -143,7 +143,7 @@ class CI_Input {
 					
 					if (is_array($global_value))
 					{
-						foreach ($val as $k => $v)
+						foreach ($global_value as $k => $v)
 						{
 							if ( ! isset($protected[$k]))
 							{

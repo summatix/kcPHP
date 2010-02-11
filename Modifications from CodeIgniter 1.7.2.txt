@@ -52,3 +52,4 @@ Added support for 404 error handler method for controllers
 Removed fonts folder
 Closes database connection after outputting cache
 Removed support for using query strings to load controllers
+Added support for running controllers from the command line

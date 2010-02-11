@@ -54,7 +54,8 @@ class CI_URI {
 	 */
 	public function _fetch_uri_string()
 	{
-		if (strtoupper($this->config->item('uri_protocol')) == 'AUTO')
+		$protocol = strtoupper($this->config->item('uri_protocol'));
+		if ($protocol == 'AUTO')
 		{
 			// If the URL has a question mark then it's simplest to just
 			// build the URI string from the zero index of the $_GET array.
@@ -96,9 +97,19 @@ class CI_URI {
 			// We've exhausted all our options...
 			$this->uri_string = '';
 		}
+		elseif ($protocol == 'CLI')
+		{
+			// Get all arguments from command line
+			$args = $_SERVER['argv'];
+			
+			// Remove the first argument since it's the file name
+			unset($args[0]);
+			
+			$this->uri_string = '/'.implode('/', $args);
+		}
 		else
 		{
-			$uri = strtoupper($this->config->item('uri_protocol'));
+			$uri = $protocol;
 
 			if ($uri == 'REQUEST_URI')
 			{
