@@ -192,8 +192,7 @@ class CI_URI {
 		static $bad = array('$', '(', ')', '%28', '%29');
 		static $good = array('&#36;', '&#40;', '&#41;', '&#40;', '&#41;');
 		
-		if ($str != '' && $this->config->item('permitted_uri_chars') != '' &&
-			$this->config->item('enable_query_strings') == FALSE)
+		if ($str != '' && $this->config->item('permitted_uri_chars') != '')
 		{
 			if ( ! preg_match('|^['.str_replace(array('\\-', '\-'), '-',
 				preg_quote($this->config->item('permitted_uri_chars'), '-')).']+$|i', $str))
