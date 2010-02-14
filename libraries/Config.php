@@ -181,24 +181,40 @@ class CI_Config {
 	 * Site URL
 	 *
 	 * @param	string	the URI string
+	 * @param	bool	whether or not to use the secure URL
 	 * @return	string
 	 */
-	public function site_url($uri = '')
+	public function site_url($uri = '', $secure = FALSE)
 	{
 		if (is_array($uri))
 		{
 			$uri = implode('/', $uri);
 		}
+		
+		$base_url = $secure ? 'secure_base_url' : 'base_url';
 
 		if ($uri == '')
 		{
-			return $this->slash_item('base_url').$this->item('index_page');
+			return $this->slash_item($base_url).$this->item('index_page');
 		}
 		else
 		{
 			$suffix = ($this->item('url_suffix') == FALSE) ? '' : $this->item('url_suffix');
-			return $this->slash_item('base_url').$this->slash_item('index_page').trim($uri, '/').$suffix; 
+			return $this->slash_item($base_url).$this->slash_item('index_page').trim($uri, '/').$suffix; 
 		}
+	}
+	
+	// --------------------------------------------------------------------
+
+	/**
+	 * Secure Site URL
+	 *
+	 * @param	string	the URI string
+	 * @return	string
+	 */
+	public function secure_site_url($uri = '')
+	{
+		return site_url($uri, TRUE);
 	}
 	
 	// --------------------------------------------------------------------

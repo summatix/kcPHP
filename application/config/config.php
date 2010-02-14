@@ -17,6 +17,7 @@
 |
 */
 $config['base_url']	= 'http://example.com/';
+$config['secure_base_url']	= 'https://example.com/';
 
 /*
 |--------------------------------------------------------------------------

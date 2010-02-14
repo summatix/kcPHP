@@ -53,3 +53,4 @@ Removed fonts folder
 Closes database connection after outputting cache
 Removed support for using query strings to load controllers
 Added support for running controllers from the command line
+Added support for SSL

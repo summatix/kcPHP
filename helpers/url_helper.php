@@ -37,6 +37,27 @@ if ( ! function_exists('site_url'))
 // ------------------------------------------------------------------------
 
 /**
+ * Secure Site URL
+ *
+ * Create a local URL based on your secure_basepath. Segments can be passed via the
+ * first parameter either as a string or an array.
+ *
+ * @access	public
+ * @param	string
+ * @return	string
+ */
+if ( ! function_exists('secure_site_url'))
+{
+	function secure_site_url($uri = '')
+	{
+		$CI =& get_instance();
+		return $CI->config->secure_site_url($uri);
+	}
+}
+
+// ------------------------------------------------------------------------
+
+/**
  * Base URL
  *
  * Returns the "base_url" item from your config file
@@ -50,6 +71,25 @@ if ( ! function_exists('base_url'))
 	{
 		$CI =& get_instance();
 		return $CI->config->slash_item('base_url');
+	}
+}
+
+// ------------------------------------------------------------------------
+
+/**
+ * Secure Base URL
+ *
+ * Returns the "secure_base_url" item from your config file
+ *
+ * @access	public
+ * @return	string
+ */
+if ( ! function_exists('secure_base_url'))
+{
+	function secure_base_url()
+	{
+		$CI =& get_instance();
+		return $CI->config->slash_item('secure_base_url');
 	}
 }
 
@@ -121,21 +161,22 @@ if ( ! function_exists('index_page'))
  * @param	string	the URL
  * @param	string	the link title
  * @param	mixed	any attributes
+ * @param	bool	whether or not to use the secure URL
  * @return	string
  */
 if ( ! function_exists('anchor'))
 {
-	function anchor($uri = '', $title = '', $attributes = '')
+	function anchor($uri = '', $title = '', $attributes = '', $secure = FALSE)
 	{
 		$title = (string) $title;
 
 		if ( ! is_array($uri))
 		{
-			$site_url = ( ! preg_match('!^\w+://! i', $uri)) ? site_url($uri) : $uri;
+			$site_url = ( ! preg_match('!^\w+://! i', $uri)) ? ($secure ? secure_site_url($uri) : site_url($uri)) : $uri;
 		}
 		else
 		{
-			$site_url = site_url($uri);
+			$site_url = $secure ? secure_site_url($uri) : site_url($uri);
 		}
 
 		if ($title == '')
@@ -149,6 +190,27 @@ if ( ! function_exists('anchor'))
 		}
 
 		return "<a href=\"{$site_url}\"{$attributes}>{$title}</a>";
+	}
+}
+
+// ------------------------------------------------------------------------
+
+/**
+ * Secure Anchor Link
+ *
+ * Creates an anchor based on the local URL.
+ *
+ * @access	public
+ * @param	string	the URL
+ * @param	string	the link title
+ * @param	mixed	any attributes
+ * @return	string
+ */
+if ( ! function_exists('secure_anchor'))
+{
+	function secure_anchor($uri = '', $title = '', $attributes = '')
+	{
+		return anchor($uri, $title, $attributes, TRUE);
 	}
 }
 
@@ -519,15 +581,16 @@ if ( ! function_exists('url_title'))
  * @access	public
  * @param	string	the URL
  * @param	string	the method: location or redirect
+ * @param	bool	whether or not to use the secure URL
  * @return	string
  */
 if ( ! function_exists('ci_redirect'))
 {
-	function ci_redirect($uri = '', $method = 'location', $http_response_code = 302)
+	function ci_redirect($uri = '', $method = 'location', $http_response_code = 302, $secure = FALSE)
 	{
 		if ( ! preg_match('#^https?://#i', $uri))
 		{
-			$uri = site_url($uri);
+			$uri = $secure ? secure_site_url : site_url($uri);
 		}
 		
 		switch($method)
@@ -541,6 +604,28 @@ if ( ! function_exists('ci_redirect'))
 				break;
 		}
 		exit;
+	}
+}
+
+// ------------------------------------------------------------------------
+
+/**
+ * Secure Header Redirect
+ *
+ * Header redirect in two flavors
+ * For very fine grained control over headers, you could use the Output
+ * Library's set_header() function.
+ *
+ * @access	public
+ * @param	string	the URL
+ * @param	string	the method: location or redirect
+ * @return	string
+ */
+if ( ! function_exists('ci_secure_redirect'))
+{
+	function ci_secure_redirect($uri = '', $method = 'location', $http_response_code = 302)
+	{
+		ci_redirect($uri, $method, $http_response_code, TRUE);
 	}
 }
 
